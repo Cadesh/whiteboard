@@ -33,16 +33,25 @@
         if (err) throw err;
       });
     
-    hotkeys('delete', (event, handler) => {
-      event.preventDefault();
-      try {
-        fs.unlinkSync('/note')
-        //file removed
-      } catch(err) {
-        console.error(err)
-      }
     });
   </script>
 </body>
+
+<!--
+hotkeys('ctrl+s,ctrl+d', function (event, handler){
+    event.preventDefault();
+    switch (handler.key) {
+      case 'ctrl+a': alert('you pressed ctrl+a!');
+        fs.writeFile('/note', document.querySelector('#note').innerHTML, err => {
+            if (err) throw err;
+        });
+        break;
+      case 'ctrl+b': alert('you pressed ctrl+b!');
+        fs.unlink ('/note')
+        break;
+
+    }
+  });
+-->
 
 </html>
