@@ -8,11 +8,10 @@
 
 </head>
 
-<body 
-    style = "font-family:georgia,garamond,serif;font-size:16px;font-style:italic; background-color: #9df0ff">
+<body style = "font-family:georgia,garamond,serif;font-size:16px;font-style:italic; background-color: #9df0ff">
 
   <h2>Welcome to My Notes!</h2>
-  <div id="note" title="Ctrl+s to save" contenteditable></div>
+  <div id="note" title="Enter to save" contenteditable></div>
 
 
   <script src="https://unpkg.com/filer/dist/filer.min.js"></script>
@@ -28,7 +27,7 @@
       var tagName = (event.target || event.srcElement).tagName;
       return !(tagName.isContentEditable || tagName == 'INPUT' || tagName == 'SELECT' || tagName == 'TEXTAREA');
     }
-    hotkeys('ctrl+s', (event, handler) => {
+    hotkeys('enter', (event, handler) => {
       event.preventDefault();
       fs.writeFile('/note', document.querySelector('#note').innerHTML, err => {
         if (err) throw err;
