@@ -11,7 +11,7 @@
 <body style = "font-family:georgia,garamond,serif;font-size:16px;font-style:italic; background-color: #9df0ff">
 
   <h2>Welcome to My Notes!</h2>
-  <div id="note" title="Ctrl+s to save" contenteditable></div>
+  <div id="note" title="Ctrl+s to save" contenteditable style ="background-color:white;" ></div>
 
 
   <script src="https://unpkg.com/filer/dist/filer.min.js"></script>
@@ -31,8 +31,16 @@
       event.preventDefault();
       fs.writeFile('/note', document.querySelector('#note').innerHTML, err => {
         if (err) throw err;
-        else console.log("Saved");
       });
+    
+    hotkeys('delete', (event, handler) => {
+      event.preventDefault();
+      try {
+        fs.unlinkSync('/note')
+        //file removed
+      } catch(err) {
+        console.error(err)
+      }
     });
   </script>
 </body>
