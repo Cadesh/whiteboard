@@ -1,12 +1,36 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>My Web Page</title>
-    </head>
 
-    <body>
-        <!-- This is a comment -->
-        <h1>Hello World!</h1>
-    </body>
+<head>
+  <meta charset="utf-8">
+  <title>My Notes</title>
+</head>
+
+<body>
+  <h2>My Notes!</h2>
+
+  <script src="https://unpkg.com/filer/dist/filer.min.js"></script>
+  <script src="https://unpkg.com/hotkeys-js/dist/hotkeys.min.js"></script>
+
+  <script>
+    const fs = new Filer.FileSystem();
+    window.addEventListener('DOMContentLoaded', (event) => {
+      fs.readFile('/note', 'utf8', (err, data) => {
+        document.querySelector('#note').innerHTML = err ? 'Type here' : data;
+      });
+    });
+    hotkeys.filter = function (event) {
+      var tagName = (event.target || event.srcElement).tagName;
+      return !(tagName.isContentEditable || tagName == 'INPUT' || tagName == 'SELECT' || tagName == 'TEXTAREA');
+    }
+    hotkeys('enter', (event, handler) => {
+      event.preventDefault();
+      fs.writeFile('/note', document.querySelector('#note').innerHTML, err => {
+        if (err) throw err;
+        else console.log("Saved");
+      });
+    });
+  </script>
+</body>
+
 </html>
