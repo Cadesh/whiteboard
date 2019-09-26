@@ -34,7 +34,13 @@
       });
     
     });
+    function save(){
+      fs.writeFile('/note', document.querySelector('#note').innerHTML, err => {
+        if (err) throw err;
+      });
+    }
   </script>
+  <button onclick="save()" class="btn-success">Save</button>
 </body>
 
 <!--
